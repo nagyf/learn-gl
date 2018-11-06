@@ -13,9 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "gl-window.hpp"
 
-GLWindow::GLWindow(const unsigned int width, const unsigned int height) {
-    this->width = width;
-    this->height = height;
+GLWindow::GLWindow() {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -24,7 +22,11 @@ GLWindow::GLWindow(const unsigned int width, const unsigned int height) {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
     
-    window = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+    this->width = mode->width;
+    this->height = mode->height;
+    window = glfwCreateWindow(mode->width, mode->height, "LearnOpenGL", NULL, NULL);
     if (window == NULL) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -33,7 +35,12 @@ GLWindow::GLWindow(const unsigned int width, const unsigned int height) {
     glfwMakeContextCurrent(window);
     glfwSetWindowUserPointer(window, this);
     // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // glfwSetInputMode(window, GLFW_CURSOR, cursorEnabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+    
+    glfwSetErrorCallback([](int /* error */, const char *description) {
+        std::cerr << description << '\n';
+        throw std::runtime_error(description);
+    });
     
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cerr << "Failed to initialize GLAD" << std::endl;
@@ -43,8 +50,8 @@ GLWindow::GLWindow(const unsigned int width, const unsigned int height) {
     viewportDidResize(width, height);
     
     glfwSetFramebufferSizeCallback(window, WindowResizeCallback);
-    glfwSetCursorPosCallback(window, MouseCallback);
-    glfwSetScrollCallback(window, ScrollCallback);
+    // glfwSetCursorPosCallback(window, MouseCallback);
+    // glfwSetScrollCallback(window, ScrollCallback);
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -64,6 +71,7 @@ glm::mat4 GLWindow::createProjectionMatrix(const float zoom, const unsigned int 
 }
 
 void GLWindow::preRun() {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
 void GLWindow::postRun() {
@@ -82,11 +90,9 @@ int GLWindow::run() {
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
-        
         processInput();
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         preRender();
         render();
         postRender();

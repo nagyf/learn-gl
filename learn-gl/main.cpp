@@ -3,6 +3,7 @@
 #include <set>
 #include <vector>
 
+#include "engine/debug/imgui-debug-window.hpp"
 #include "engine/data/texture.hpp"
 #include "engine/camera/fps-camera.hpp"
 #include "engine/shader/shader.h"
@@ -14,6 +15,7 @@
 
 class GameWindow: public GLWindow {
 private:
+    boost::scoped_ptr<ImguiDebugWindow> debugWindow;
     boost::scoped_ptr<Shader> shader;
     boost::scoped_ptr<TextureManager> textureManager;
     
@@ -24,13 +26,13 @@ private:
     double lastX, lastY;
     bool firstMouse = true;
 public:
-    GameWindow(): GLWindow(1024, 768) {
+    GameWindow(): GLWindow() {
         shader.reset(new Shader("/Users/nagyf/dev/home/learn-gl/learn-gl/shader/vertex.glsl", "/Users/nagyf/dev/home/learn-gl/learn-gl/shader/fragment.glsl"));
         textureManager.reset(new TextureManager());
         Texture boxTexture = textureManager->load("texture_diffuse", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/box.png");
         Texture boxSpecularTexture = textureManager->load("texture_specular", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/box_specular.png");
         
-        camera.reset(new FPSCamera(glm::vec3(0.0, 0.0, 3.0)));
+        camera.reset(new FPSCamera(glm::vec3(0.0, 0.0, 5.0)));
         box.reset(new Box(std::vector<Texture>({boxTexture, boxSpecularTexture})));
         
         // Point light
@@ -43,10 +45,13 @@ public:
                                         glm::vec3(0.05, 0.05, 0.05),
                                         glm::vec3(0.4, 0.4, 0.4),
                                         glm::vec3(0.5, 0.5, 0.5)));
+        
+        debugWindow.reset(new ImguiDebugWindow(window));
     }
 protected:
     void preRender() {
         box->rotateY(deltaTime * 25.0);
+        debugWindow->preRender();
     }
     
     void render() {
@@ -74,6 +79,11 @@ protected:
         
         shader->setVec3("viewPos", camera->getPosition());
         box->render(*shader);
+        debugWindow->render();
+    }
+    
+    void postRender() {
+        debugWindow->postRender();
     }
     
     void processInput() {

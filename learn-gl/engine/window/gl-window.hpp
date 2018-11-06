@@ -39,6 +39,7 @@ private:
         window->mouseScrolled(xOffset, yOffset);
     }
 protected:
+    bool cursorEnabled = false;
     unsigned int width, height;
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
@@ -60,7 +61,7 @@ protected:
     virtual void mouseMoved(const double x, const double y);
     virtual void mouseScrolled(const double xOffset, const double yOffset);
 public:
-    GLWindow(const unsigned int width, const unsigned int height);
+    GLWindow();
     virtual ~GLWindow();
     int run();
 };

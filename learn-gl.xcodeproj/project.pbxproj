@@ -21,6 +21,13 @@
 		49E0CD2E219187EB00B13234 /* point-light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD21219187EB00B13234 /* point-light.cpp */; };
 		49E0CD302191881200B13234 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD2F2191881200B13234 /* glad.c */; };
 		49E0CD332191B72A00B13234 /* directional-light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD312191B72A00B13234 /* directional-light.cpp */; };
+		49E0CD392191FB5F00B13234 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD352191FB5F00B13234 /* imgui_widgets.cpp */; };
+		49E0CD3A2191FB5F00B13234 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD362191FB5F00B13234 /* imgui.cpp */; };
+		49E0CD3C2191FB5F00B13234 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD382191FB5F00B13234 /* imgui_draw.cpp */; };
+		49E0CD3E2192259A00B13234 /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD3D2192259A00B13234 /* imgui_impl_glfw.cpp */; };
+		49E0CD40219226A100B13234 /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD3F219226A100B13234 /* imgui_impl_opengl3.cpp */; };
+		49E0CD44219228E600B13234 /* imgui-debug-window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD42219228E600B13234 /* imgui-debug-window.cpp */; };
+		49E0CD4621923A9800B13234 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD4521923A9800B13234 /* imgui_demo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +73,14 @@
 		49E0CD2F2191881200B13234 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
 		49E0CD312191B72A00B13234 /* directional-light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "directional-light.cpp"; sourceTree = "<group>"; };
 		49E0CD322191B72A00B13234 /* directional-light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "directional-light.hpp"; sourceTree = "<group>"; };
+		49E0CD352191FB5F00B13234 /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
+		49E0CD362191FB5F00B13234 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		49E0CD382191FB5F00B13234 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		49E0CD3D2192259A00B13234 /* imgui_impl_glfw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_glfw.cpp; sourceTree = "<group>"; };
+		49E0CD3F219226A100B13234 /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl3.cpp; sourceTree = "<group>"; };
+		49E0CD42219228E600B13234 /* imgui-debug-window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "imgui-debug-window.cpp"; sourceTree = "<group>"; };
+		49E0CD43219228E600B13234 /* imgui-debug-window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "imgui-debug-window.hpp"; sourceTree = "<group>"; };
+		49E0CD4521923A9800B13234 /* imgui_demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +116,7 @@
 		49E0CCB52191869700B13234 /* learn-gl */ = {
 			isa = PBXGroup;
 			children = (
+				49E0CD342191FB5F00B13234 /* imgui */,
 				49E0CD2F2191881200B13234 /* glad.c */,
 				49E0CCBF219186DB00B13234 /* assets */,
 				49E0CCBE219186DB00B13234 /* include */,
@@ -123,6 +139,7 @@
 		49E0CD0A219187EB00B13234 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				49E0CD41219228C300B13234 /* debug */,
 				49E0CD0B219187EB00B13234 /* camera */,
 				49E0CD0E219187EB00B13234 /* object */,
 				49E0CD15219187EB00B13234 /* window */,
@@ -159,8 +176,8 @@
 		49E0CD15219187EB00B13234 /* window */ = {
 			isa = PBXGroup;
 			children = (
-				49E0CD16219187EB00B13234 /* gl-window.cpp */,
 				49E0CD17219187EB00B13234 /* gl-window.hpp */,
+				49E0CD16219187EB00B13234 /* gl-window.cpp */,
 			);
 			path = window;
 			sourceTree = "<group>";
@@ -203,6 +220,28 @@
 				49E0CD25219187EB00B13234 /* texture.hpp */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		49E0CD342191FB5F00B13234 /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				49E0CD352191FB5F00B13234 /* imgui_widgets.cpp */,
+				49E0CD362191FB5F00B13234 /* imgui.cpp */,
+				49E0CD382191FB5F00B13234 /* imgui_draw.cpp */,
+				49E0CD3D2192259A00B13234 /* imgui_impl_glfw.cpp */,
+				49E0CD3F219226A100B13234 /* imgui_impl_opengl3.cpp */,
+				49E0CD4521923A9800B13234 /* imgui_demo.cpp */,
+			);
+			path = imgui;
+			sourceTree = "<group>";
+		};
+		49E0CD41219228C300B13234 /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				49E0CD43219228E600B13234 /* imgui-debug-window.hpp */,
+				49E0CD42219228E600B13234 /* imgui-debug-window.cpp */,
+			);
+			path = debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,18 +300,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E0CD40219226A100B13234 /* imgui_impl_opengl3.cpp in Sources */,
 				49E0CD2A219187EB00B13234 /* gl-window.cpp in Sources */,
 				49E0CD26219187EB00B13234 /* fps-camera.cpp in Sources */,
 				49E0CD2D219187EB00B13234 /* light.cpp in Sources */,
 				49E0CD2C219187EB00B13234 /* shader.cpp in Sources */,
+				49E0CD4621923A9800B13234 /* imgui_demo.cpp in Sources */,
 				49E0CD302191881200B13234 /* glad.c in Sources */,
+				49E0CD3A2191FB5F00B13234 /* imgui.cpp in Sources */,
+				49E0CD44219228E600B13234 /* imgui-debug-window.cpp in Sources */,
 				49E0CD332191B72A00B13234 /* directional-light.cpp in Sources */,
+				49E0CD3C2191FB5F00B13234 /* imgui_draw.cpp in Sources */,
 				49E0CD2B219187EB00B13234 /* texture-manager.cpp in Sources */,
 				49E0CD28219187EB00B13234 /* box.cpp in Sources */,
+				49E0CD392191FB5F00B13234 /* imgui_widgets.cpp in Sources */,
 				49E0CD29219187EB00B13234 /* gl-object.cpp in Sources */,
 				49E0CD2E219187EB00B13234 /* point-light.cpp in Sources */,
 				49E0CCB72191869700B13234 /* main.cpp in Sources */,
 				49E0CD27219187EB00B13234 /* mesh.cpp in Sources */,
+				49E0CD3E2192259A00B13234 /* imgui_impl_glfw.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
