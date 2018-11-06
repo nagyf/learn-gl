@@ -20,6 +20,7 @@
 		49E0CD2D219187EB00B13234 /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD20219187EB00B13234 /* light.cpp */; };
 		49E0CD2E219187EB00B13234 /* point-light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD21219187EB00B13234 /* point-light.cpp */; };
 		49E0CD302191881200B13234 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD2F2191881200B13234 /* glad.c */; };
+		49E0CD332191B72A00B13234 /* directional-light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CD312191B72A00B13234 /* directional-light.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,8 @@
 		49E0CD24219187EB00B13234 /* vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vertex.hpp; sourceTree = "<group>"; };
 		49E0CD25219187EB00B13234 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
 		49E0CD2F2191881200B13234 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
+		49E0CD312191B72A00B13234 /* directional-light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "directional-light.cpp"; sourceTree = "<group>"; };
+		49E0CD322191B72A00B13234 /* directional-light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "directional-light.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,10 +186,12 @@
 		49E0CD1E219187EB00B13234 /* light */ = {
 			isa = PBXGroup;
 			children = (
-				49E0CD1F219187EB00B13234 /* point-light.hpp */,
-				49E0CD21219187EB00B13234 /* point-light.cpp */,
 				49E0CD22219187EB00B13234 /* light.hpp */,
 				49E0CD20219187EB00B13234 /* light.cpp */,
+				49E0CD1F219187EB00B13234 /* point-light.hpp */,
+				49E0CD21219187EB00B13234 /* point-light.cpp */,
+				49E0CD322191B72A00B13234 /* directional-light.hpp */,
+				49E0CD312191B72A00B13234 /* directional-light.cpp */,
 			);
 			path = light;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				49E0CD2D219187EB00B13234 /* light.cpp in Sources */,
 				49E0CD2C219187EB00B13234 /* shader.cpp in Sources */,
 				49E0CD302191881200B13234 /* glad.c in Sources */,
+				49E0CD332191B72A00B13234 /* directional-light.cpp in Sources */,
 				49E0CD2B219187EB00B13234 /* texture-manager.cpp in Sources */,
 				49E0CD28219187EB00B13234 /* box.cpp in Sources */,
 				49E0CD29219187EB00B13234 /* gl-object.cpp in Sources */,

@@ -10,6 +10,7 @@
 #include "engine/object/box.hpp"
 #include "engine/window/gl-window.hpp"
 #include "engine/light/point-light.hpp"
+#include "engine/light/directional-light.hpp"
 
 class GameWindow: public GLWindow {
 private:
@@ -19,6 +20,7 @@ private:
     boost::scoped_ptr<Box> box;
     boost::scoped_ptr<FPSCamera> camera;
     boost::scoped_ptr<PointLight> pointLight;
+    boost::scoped_ptr<DirectionalLight> dirLight;
     double lastX, lastY;
     bool firstMouse = true;
 public:
@@ -30,10 +32,17 @@ public:
         
         camera.reset(new FPSCamera(glm::vec3(0.0, 0.0, 3.0)));
         box.reset(new Box(std::vector<Texture>({boxTexture, boxSpecularTexture})));
+        
+        // Point light
         pointLight.reset(new PointLight(glm::vec3(1.2f, 1.0f, 2.0f),
                                         glm::vec3(0.2,0.2,0.2),
                                         glm::vec3(0.5,0.5,0.5),
                                         glm::vec3(1.0,1.0,1.0)));
+        // Directional light
+        dirLight.reset(new DirectionalLight(glm::vec3(1.2f, 1.0f, 2.0f),
+                                        glm::vec3(0.05, 0.05, 0.05),
+                                        glm::vec3(0.4, 0.4, 0.4),
+                                        glm::vec3(0.5, 0.5, 0.5)));
     }
 protected:
     void preRender() {
@@ -46,10 +55,18 @@ protected:
         shader->setMat4("projection", projectionMatrix);
         shader->setMat4("view", camera->viewMatrix());
         
-        shader->setVec3("light.ambient", pointLight->getAmbient());
-        shader->setVec3("light.diffuse", pointLight->getDiffuse());
-        shader->setVec3("light.specular", pointLight->getSpecular());
-        shader->setVec3("light.position", pointLight->getPosition());
+        shader->setVec3("pointLight.ambient", pointLight->getAmbient());
+        shader->setVec3("pointLight.diffuse", pointLight->getDiffuse());
+        shader->setVec3("pointLight.specular", pointLight->getSpecular());
+        shader->setFloat("pointLight.constant", pointLight->getConstant());
+        shader->setFloat("pointLight.linear", pointLight->getLinear());
+        shader->setFloat("pointLight.quadratic", pointLight->getQuadratic());
+        shader->setVec3("pointLight.position", pointLight->getPosition());
+        
+        shader->setVec3("dirLight.ambient", dirLight->getAmbient());
+        shader->setVec3("dirLight.diffuse", dirLight->getDiffuse());
+        shader->setVec3("dirLight.specular", dirLight->getSpecular());
+        shader->setVec3("dirLight.direction", dirLight->getDirection());
         
         shader->setInt("material.diffuse", 0);
         shader->setInt("material.specular", 1);
