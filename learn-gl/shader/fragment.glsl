@@ -24,15 +24,13 @@ uniform Material material;
 
 void main() {
     // Ambient
-    float specularStrength = 0.5;
-    float ambientStrength = 0.1;
     vec3 ambient = light.ambient * texture(material.diffuse, texCoords).rgb;
     
     // Diffuse
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.position - fragPos);
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.diffuse * texture(material.diffuse, texCoords).rgb;
+    vec3 diffuse = light.diffuse * diff * texture(material.diffuse, texCoords).rgb;
     
     // Specular
     vec3 viewDir = normalize(viewPos - fragPos);

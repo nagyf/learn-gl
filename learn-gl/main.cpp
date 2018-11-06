@@ -23,17 +23,17 @@ private:
     bool firstMouse = true;
 public:
     GameWindow(): GLWindow(1024, 768) {
-        shader.reset(new Shader("/Users/nagyf/dev/home/hello-gl2/hello-gl2/shader/vertex.glsl", "/Users/nagyf/dev/home/hello-gl2/hello-gl2/shader/fragment.glsl"));
+        shader.reset(new Shader("/Users/nagyf/dev/home/learn-gl/learn-gl/shader/vertex.glsl", "/Users/nagyf/dev/home/learn-gl/learn-gl/shader/fragment.glsl"));
         textureManager.reset(new TextureManager());
-        Texture boxTexture = textureManager->load("texture_diffuse", "/Users/nagyf/dev/home/hello-gl2/hello-gl2/assets/box.png");
-        Texture boxSpecularTexture = textureManager->load("texture_specular", "/Users/nagyf/dev/home/hello-gl2/hello-gl2/assets/box_specular.png");
+        Texture boxTexture = textureManager->load("texture_diffuse", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/box.png");
+        Texture boxSpecularTexture = textureManager->load("texture_specular", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/box_specular.png");
         
         camera.reset(new FPSCamera(glm::vec3(0.0, 0.0, 3.0)));
         box.reset(new Box(std::vector<Texture>({boxTexture, boxSpecularTexture})));
         pointLight.reset(new PointLight(glm::vec3(1.2f, 1.0f, 2.0f),
-                                        glm::vec3(0.4f, 0.4f, 0.4f),
-                                        glm::vec3(0.5f, 0.5f, 0.5f),
-                                        glm::vec3(1.0f, 1.0f, 1.0f)));
+                                        glm::vec3(0.2,0.2,0.2),
+                                        glm::vec3(0.5,0.5,0.5),
+                                        glm::vec3(1.0,1.0,1.0)));
     }
 protected:
     void preRender() {

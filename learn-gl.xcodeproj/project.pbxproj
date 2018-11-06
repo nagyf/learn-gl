@@ -99,10 +99,10 @@
 			isa = PBXGroup;
 			children = (
 				49E0CD2F2191881200B13234 /* glad.c */,
-				49E0CD0A219187EB00B13234 /* engine */,
 				49E0CCBF219186DB00B13234 /* assets */,
 				49E0CCBE219186DB00B13234 /* include */,
 				49E0CCC0219186DB00B13234 /* shader */,
+				49E0CD0A219187EB00B13234 /* engine */,
 				49E0CCB62191869700B13234 /* main.cpp */,
 			);
 			path = "learn-gl";
@@ -184,9 +184,9 @@
 			isa = PBXGroup;
 			children = (
 				49E0CD1F219187EB00B13234 /* point-light.hpp */,
-				49E0CD20219187EB00B13234 /* light.cpp */,
 				49E0CD21219187EB00B13234 /* point-light.cpp */,
 				49E0CD22219187EB00B13234 /* light.hpp */,
+				49E0CD20219187EB00B13234 /* light.cpp */,
 			);
 			path = light;
 			sourceTree = "<group>";
