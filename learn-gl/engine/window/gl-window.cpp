@@ -21,6 +21,7 @@ GLWindow::GLWindow() {
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+    glfwWindowHint(GLFW_SAMPLES, 4);
     
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
@@ -57,6 +58,7 @@ GLWindow::GLWindow() {
     glEnable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
     glFrontFace(GL_CCW);
+    glEnable(GL_MULTISAMPLE);
 }
 
 GLWindow::~GLWindow() {
