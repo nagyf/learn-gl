@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		49510D392192E53200988BF3 /* plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49510D372192E53200988BF3 /* plane.cpp */; };
 		49510D3C2195D30500988BF3 /* skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49510D3A2195D30500988BF3 /* skybox.cpp */; };
+		49BFB6C4219616B500EB2842 /* spot-light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49BFB6C2219616B500EB2842 /* spot-light.cpp */; };
 		49E0CCB72191869700B13234 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E0CCB62191869700B13234 /* main.cpp */; };
 		49E0CCC3219186EC00B13234 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E0CCC2219186EC00B13234 /* OpenGL.framework */; };
 		49E0CCC52191871100B13234 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E0CCC42191871100B13234 /* libglfw.3.2.dylib */; };
@@ -49,6 +50,8 @@
 		49510D382192E53200988BF3 /* plane.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = plane.hpp; sourceTree = "<group>"; };
 		49510D3A2195D30500988BF3 /* skybox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = skybox.cpp; sourceTree = "<group>"; };
 		49510D3B2195D30500988BF3 /* skybox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = skybox.hpp; sourceTree = "<group>"; };
+		49BFB6C2219616B500EB2842 /* spot-light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spot-light.cpp"; sourceTree = "<group>"; };
+		49BFB6C3219616B500EB2842 /* spot-light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spot-light.hpp"; sourceTree = "<group>"; };
 		49E0CCB32191869700B13234 /* learn-gl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "learn-gl"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E0CCB62191869700B13234 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		49E0CCBE219186DB00B13234 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				49E0CD21219187EB00B13234 /* point-light.cpp */,
 				49E0CD322191B72A00B13234 /* directional-light.hpp */,
 				49E0CD312191B72A00B13234 /* directional-light.cpp */,
+				49BFB6C2219616B500EB2842 /* spot-light.cpp */,
+				49BFB6C3219616B500EB2842 /* spot-light.hpp */,
 			);
 			path = light;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49BFB6C4219616B500EB2842 /* spot-light.cpp in Sources */,
 				49E0CD40219226A100B13234 /* imgui_impl_opengl3.cpp in Sources */,
 				49E0CD2A219187EB00B13234 /* gl-window.cpp in Sources */,
 				49E0CD26219187EB00B13234 /* fps-camera.cpp in Sources */,

@@ -50,6 +50,7 @@ public:
     void processMouseScroll(float yoffset);
     
     glm::vec3 getPosition() const;
+    glm::vec3 getFront() const;
 };
 
 #endif /* camera_hpp */

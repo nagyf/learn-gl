@@ -14,6 +14,7 @@
 #include "engine/window/gl-window.hpp"
 #include "engine/light/point-light.hpp"
 #include "engine/light/directional-light.hpp"
+#include "engine/light/spot-light.hpp"
 
 class GameWindow: public GLWindow {
 private:
@@ -28,6 +29,7 @@ private:
     boost::scoped_ptr<FPSCamera> camera;
     boost::scoped_ptr<PointLight> pointLight;
     boost::scoped_ptr<DirectionalLight> dirLight;
+    boost::scoped_ptr<SpotLight> spotLight;
     double lastX, lastY;
     bool firstMouse = true;
 public:
@@ -68,6 +70,8 @@ public:
                                         glm::vec3(0.4, 0.4, 0.4),
                                         glm::vec3(0.5, 0.5, 0.5)));
         
+        spotLight.reset(new SpotLight());
+        
         debugWindow.reset(new ImguiDebugWindow(window));
     }
 protected:
@@ -75,6 +79,8 @@ protected:
         box->rotateY(deltaTime * 25.0);
         debugWindow->preRender();
         projectionMatrix = createProjectionMatrix(camera->zoom, width, height);
+        spotLight->setPosition(camera->getPosition());
+        spotLight->setDirection(camera->getFront());
     }
     
     void render() {
@@ -90,6 +96,17 @@ protected:
         shader->setFloat("pointLight.quadratic", pointLight->getQuadratic());
         shader->setVec3("pointLight.position", pointLight->getPosition());
         
+        shader->setVec3("spotLight.ambient", spotLight->getAmbient());
+        shader->setVec3("spotLight.diffuse", spotLight->getDiffuse());
+        shader->setVec3("spotLight.specular", spotLight->getSpecular());
+        shader->setFloat("spotLight.constant", spotLight->getConstant());
+        shader->setFloat("spotLight.linear", spotLight->getLinear());
+        shader->setFloat("spotLight.quadratic", spotLight->getQuadratic());
+        shader->setVec3("spotLight.position", spotLight->getPosition());
+        shader->setVec3("spotLight.direction", spotLight->getDirection());
+        shader->setFloat("spotLight.cutOff", spotLight->getCutOff());
+        shader->setFloat("spotLight.outerCutOff", spotLight->getOuterCutOff());
+        
         shader->setVec3("dirLight.ambient", dirLight->getAmbient());
         shader->setVec3("dirLight.diffuse", dirLight->getDiffuse());
         shader->setVec3("dirLight.specular", dirLight->getSpecular());
@@ -101,6 +118,9 @@ protected:
         
         shader->setVec3("viewPos", camera->getPosition());
         box->render(*shader);
+        
+        shader->setInt("material.specular", 0);
+        shader->setFloat("material.shininess", 8.0f);
         ground->render(*shader);
         skyboxShader->use();
         skyboxShader->setMat4("projection", projectionMatrix);

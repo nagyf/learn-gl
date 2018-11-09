@@ -90,3 +90,7 @@ void FPSCamera::processMouseScroll(float yoffset) {
 glm::vec3 FPSCamera::getPosition() const {
     return position;
 }
+
+glm::vec3 FPSCamera::getFront() const {
+    return front;
+}
