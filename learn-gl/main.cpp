@@ -9,6 +9,8 @@
 #include "engine/shader/shader.h"
 #include "engine/texture/texture-manager.hpp"
 #include "engine/object/box.hpp"
+#include "engine/object/plane.hpp"
+#include "engine/object/skybox.hpp"
 #include "engine/window/gl-window.hpp"
 #include "engine/light/point-light.hpp"
 #include "engine/light/directional-light.hpp"
@@ -17,8 +19,11 @@ class GameWindow: public GLWindow {
 private:
     boost::scoped_ptr<ImguiDebugWindow> debugWindow;
     boost::scoped_ptr<Shader> shader;
+    boost::scoped_ptr<Shader> skyboxShader;
     boost::scoped_ptr<TextureManager> textureManager;
     
+    boost::scoped_ptr<Skybox> skybox;
+    boost::scoped_ptr<Plane> ground;
     boost::scoped_ptr<Box> box;
     boost::scoped_ptr<FPSCamera> camera;
     boost::scoped_ptr<PointLight> pointLight;
@@ -28,12 +33,29 @@ private:
 public:
     GameWindow(): GLWindow() {
         shader.reset(new Shader("/Users/nagyf/dev/home/learn-gl/learn-gl/shader/vertex.glsl", "/Users/nagyf/dev/home/learn-gl/learn-gl/shader/fragment.glsl"));
+        skyboxShader.reset(new Shader("/Users/nagyf/dev/home/learn-gl/learn-gl/shader/skybox_vertex.glsl", "/Users/nagyf/dev/home/learn-gl/learn-gl/shader/skybox_fragment.glsl"));
         textureManager.reset(new TextureManager());
         Texture boxTexture = textureManager->load("texture_diffuse", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/box.png");
         Texture boxSpecularTexture = textureManager->load("texture_specular", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/box_specular.png");
+        Texture pavemantTexture = textureManager->load("texture_diffuse", "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/pavement.jpg");
+        
+        std::vector<std::string> faces
+        {
+            "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/skybox/right.jpg",
+            "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/skybox/left.jpg",
+            "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/skybox/top.jpg",
+            "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/skybox/bottom.jpg",
+            "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/skybox/front.jpg",
+            "/Users/nagyf/dev/home/learn-gl/learn-gl/assets/skybox/back.jpg"
+        };
+        Texture skyboxCubemap = textureManager->loadCubemap(faces);
+        skybox.reset(new Skybox(skyboxCubemap));
         
         camera.reset(new FPSCamera(glm::vec3(0.0, 0.0, 5.0)));
         box.reset(new Box(std::vector<Texture>({boxTexture, boxSpecularTexture})));
+        ground.reset(new Plane(100.0f, std::vector<Texture>({pavemantTexture})));
+        ground->moveY(-1.0f);
+        ground->rotateX(90.0f);
         
         // Point light
         pointLight.reset(new PointLight(glm::vec3(1.2f, 1.0f, 2.0f),
@@ -52,11 +74,11 @@ protected:
     void preRender() {
         box->rotateY(deltaTime * 25.0);
         debugWindow->preRender();
+        projectionMatrix = createProjectionMatrix(camera->zoom, width, height);
     }
     
     void render() {
         shader->use();
-        projectionMatrix = createProjectionMatrix(camera->zoom, width, height);
         shader->setMat4("projection", projectionMatrix);
         shader->setMat4("view", camera->viewMatrix());
         
@@ -79,6 +101,12 @@ protected:
         
         shader->setVec3("viewPos", camera->getPosition());
         box->render(*shader);
+        ground->render(*shader);
+        skyboxShader->use();
+        skyboxShader->setMat4("projection", projectionMatrix);
+        skyboxShader->setMat4("view", glm::mat4(glm::mat3(camera->viewMatrix())));
+        skybox->render(*skyboxShader);
+    
         debugWindow->render();
     }
     

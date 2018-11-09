@@ -57,6 +57,10 @@ void GLObject::rotateYZ(float radians) {
     setModelMatrix(glm::rotate(modelMatrix, glm::radians(radians), axisY() + axisZ()));
 }
 
+void GLObject::moveY(float dy) {
+    setModelMatrix(glm::translate(modelMatrix, glm::vec3(0.0f, dy, 0.0f)));
+}
+
 void GLObject::render(const Shader &shader) {
     shader.use();
     preRender(shader);

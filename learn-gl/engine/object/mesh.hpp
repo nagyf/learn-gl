@@ -25,6 +25,7 @@ protected:
     virtual void doRender(const Shader &shader);
 public:
     Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+    ~Mesh();
 };
 
 #endif /* mesh_hpp */

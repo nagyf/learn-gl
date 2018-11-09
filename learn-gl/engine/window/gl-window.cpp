@@ -35,7 +35,7 @@ GLWindow::GLWindow() {
     glfwMakeContextCurrent(window);
     glfwSetWindowUserPointer(window, this);
     // tell GLFW to capture our mouse
-    // glfwSetInputMode(window, GLFW_CURSOR, cursorEnabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, cursorEnabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
     
     glfwSetErrorCallback([](int /* error */, const char *description) {
         std::cerr << description << '\n';
@@ -50,9 +50,13 @@ GLWindow::GLWindow() {
     viewportDidResize(width, height);
     
     glfwSetFramebufferSizeCallback(window, WindowResizeCallback);
-    // glfwSetCursorPosCallback(window, MouseCallback);
-    // glfwSetScrollCallback(window, ScrollCallback);
+    glfwSetCursorPosCallback(window, MouseCallback);
+    glfwSetScrollCallback(window, ScrollCallback);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+    glFrontFace(GL_CCW);
 }
 
 GLWindow::~GLWindow() {
@@ -92,7 +96,7 @@ int GLWindow::run() {
         lastFrame = currentFrame;
         processInput();
         
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         preRender();
         render();
         postRender();

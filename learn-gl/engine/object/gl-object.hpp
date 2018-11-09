@@ -60,6 +60,8 @@ public:
     void rotateXY(float radians);
     void rotateXZ(float radians);
     void rotateYZ(float radians);
+    
+    void moveY(float dy);
 };
 
 #endif /* gl_object_hpp */

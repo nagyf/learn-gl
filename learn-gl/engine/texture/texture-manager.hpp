@@ -9,6 +9,7 @@
 #ifndef texture_manager_hpp
 #define texture_manager_hpp
 
+#include <vector>
 #include <string>
 #include "../data/texture.hpp"
 
@@ -17,6 +18,8 @@ public:
     TextureManager();
     
     Texture load(const std::string &type, const std::string &path) const;
+    
+    Texture loadCubemap(const std::vector<std::string> &faces) const;
 };
 
 #endif /* texture_manager_hpp */
